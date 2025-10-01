@@ -10,7 +10,7 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "connect_IMS",
+            "name": "connect_ima",
             "database": "inventory_management_db",
             "username": "yassine"
         }

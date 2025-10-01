@@ -16,10 +16,10 @@ $uri = parse_url($_SERVER['REQUEST_URI']);
 
 $routes = [
     '/'               => CONTROLLERS_PATH . 'dashboard.controller.php',
-    '/product'        => CONTROLLERS_PATH . 'product.controller.php',
-    '/supplier'       => CONTROLLERS_PATH . 'supplier.controller.php',
-    '/category'       => CONTROLLERS_PATH . 'category.controller.php',
-    '/stock_movement' => CONTROLLERS_PATH . 'stock_movement.controller.php',
+    '/products'        => CONTROLLERS_PATH . 'product.controller.php',
+    '/suppliers'       => CONTROLLERS_PATH . 'supplier.controller.php',
+    '/categories'       => CONTROLLERS_PATH . 'category.controller.php',
+    '/stock_movements' => CONTROLLERS_PATH . 'stock_movement.controller.php',
 ];
 
 if (array_key_exists($uri['path'], $routes)) {
