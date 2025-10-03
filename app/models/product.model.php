@@ -27,7 +27,7 @@ function getProductInfo(int $productId): array
 {
     global $connect;
     $sql = "
-        SELECT p.product_name, c.category_name, s.supplier_name, p.product_quantity, p.product_price
+        SELECT p.product_id, p.product_name, c.category_name, s.supplier_name, p.product_quantity, p.product_price
         FROM products p
         JOIN categories c
             ON p.category_id = c.category_id
