@@ -7,6 +7,8 @@ require MODELS_PATH . 'product.model.php';
 
 // deleteProduct(8);
 
+// addNewProduct('Komoma', 4, 3, 600, 178.56);
+
 $products = getAllProducts();
 mysqli_close($connect);
 require VIEWS_PATH . 'product/products.view.php';
