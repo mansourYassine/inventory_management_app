@@ -1,2 +1,21 @@
-<?php
-echo('<h1>Stock movement Page</h1>');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Movements page</title>
+</head>
+<body>
+    <h1>Stock Movements Page</h1>
+    <table border="1">
+        <?php foreach ($stockMovements as $stockMovement):?>
+            <tr>
+                <td><?= $stockMovement['product_name'] ?></td>
+                <td><?= $stockMovement['movement_type'] ?></td>
+                <td><?= $stockMovement['movement_quantity'] ?></td>
+                <td><?= $stockMovement['movement_date'] ?></td>
+            </tr>
+        <?php endforeach?>
+    </table>
+</body>
+</html>
