@@ -6,4 +6,6 @@ require MODELS_PATH . 'product.model.php';
 $products = getAllProducts();
 mysqli_close($connect);
 
+dd($products);
+
 require VIEWS_PATH . 'product/products.view.php';

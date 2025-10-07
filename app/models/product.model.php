@@ -5,7 +5,14 @@ declare(strict_types=1);
 function getAllProducts(): array
 {
     global $connect;
-    $sql = "SELECT * FROM products";
+    $sql = "
+        SELECT p.product_id, p.product_name, c.category_id, c.category_name, s.supplier_id, s.supplier_name, p.product_quantity, p.product_price
+        FROM products p
+        JOIN categories c
+            ON p.category_id = c.category_id
+        JOIN suppliers s
+            ON p.supplier_id = s.supplier_id
+    ";
     $result = mysqli_query($connect, $sql);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
