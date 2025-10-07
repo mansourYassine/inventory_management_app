@@ -6,6 +6,8 @@
     <title>Stock Movements page</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Stock Movements Page</h1>
     <table border="1">
         <?php foreach ($stockMovements as $stockMovement):?>

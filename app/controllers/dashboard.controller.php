@@ -9,6 +9,6 @@ $totalProductsValue = getTotalProdutsValue();
 
 $lowStockProducts = getLowStockProducts();
 
-dd($lowStockProducts);
+// dd($lowStockProducts);
 
 require (VIEWS_PATH . 'dashboard.view.php');

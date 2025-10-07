@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products page</title>
+    <link rel="stylesheet" href="\assets\css\master.css">
+    <link rel="stylesheet" href="\assets\css\all.min.css">
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Products Page</h1>
     <table border="1">
         <?php foreach ($products as $product):?>
