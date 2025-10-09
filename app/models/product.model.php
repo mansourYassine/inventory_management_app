@@ -6,7 +6,7 @@ function getAllProducts(): array
 {
     global $connect;
     $sql = "
-        SELECT p.product_id, p.product_name, c.category_id, c.category_name, s.supplier_id, s.supplier_name, p.product_quantity, p.product_price
+        SELECT p.product_id, p.product_name, c.category_id, c.category_name, s.supplier_id, s.supplier_name, p.product_quantity, p.product_price, p.is_active
         FROM products p
         JOIN categories c
             ON p.category_id = c.category_id

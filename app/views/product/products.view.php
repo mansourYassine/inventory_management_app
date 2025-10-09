@@ -11,13 +11,17 @@
     <?php require VIEWS_PATH . 'includes\header.php' ?>
     <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Products Page</h1>
+    <a href="/products/add">Add New Product</a>
     <table border="1">
         <?php foreach ($products as $product):?>
             <?php if (strcmp($product['is_active'], 'YES') === 0):?>
                 <tr>
                     <td><?= $product['product_name'] ?></td>
+                    <td><?= $product['category_name'] ?></td>
+                    <td><?= $product['supplier_name'] ?></td>
                     <td><?= $product['product_quantity'] ?></td>
                     <td><?= $product['product_price'] ?></td>
+                    <td><a href="/products/info?product_id=<?= $product['product_id'] ?>">More Info</a></td>
                 </tr>
             <?php endif ?>
         <?php endforeach?>
