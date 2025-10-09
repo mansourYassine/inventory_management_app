@@ -43,7 +43,7 @@ function getProductInfo(int $productId): array
         WHERE p.product_id = '$productId';
     ";
     $result = mysqli_query($connect, $sql);
-    $productInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $productInfo = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
     return $productInfo;
 }

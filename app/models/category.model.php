@@ -39,7 +39,8 @@ function deleteCategory(int $categoryId)
 {
     global $connect;
     $sql = "
-        DELETE FROM categories
+        UPDATE categories
+        SET is_categ_active = 'NO'
         WHERE category_id = '$categoryId';
     ";
     mysqli_query($connect, $sql);

@@ -39,7 +39,8 @@ function deleteSupplier(int $supplierId)
 {
     global $connect;
     $sql = "
-        DELETE FROM suppliers
+        UPDATE suppliers
+        SET is_supp_active = 'NO'
         WHERE supplier_id = '$supplierId';
     ";
     mysqli_query($connect, $sql);
