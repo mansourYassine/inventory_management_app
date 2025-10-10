@@ -26,7 +26,12 @@ if (strcmp($path, '/products') === 0) {
     } elseif (strcmp($path, '/products/add') === 0) {
         require VIEWS_PATH . 'product/add_product.view.php';
     } elseif (strcmp($path, '/products/edit') === 0) {
-        require VIEWS_PATH . 'product/edit_product.view.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Edit page logic
+            require VIEWS_PATH . 'product/edit_product.view.php';
+        } else {
+            abort();
+        }
     } else {
         abort();
     }

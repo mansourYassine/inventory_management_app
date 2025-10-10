@@ -18,6 +18,15 @@
             <li>Product Quantity : <?= $productInfo['product_quantity'] ?></li>
             <li>Product Price : <?= $productInfo['product_price'] ?></li>
         </ul>
+        <form action="/products/edit" method="post">
+            <input type="hidden" name="product_id" value="<?= $productInfo['product_id'] ?>">
+            <button type="submit">Edit</button>
+        </form>
+        <br>
         <a href="/products/info?delete_product_id=<?= $productInfo['product_id'] ?>">Delete</a>
+        <form action="/products/info" method="post">
+            <input type="hidden" name="product_id" value="<?= $productInfo['product_id'] ?>">
+            <button type="submit">Edit</button>
+        </form>
     </body>
 </html>
