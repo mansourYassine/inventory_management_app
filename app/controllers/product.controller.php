@@ -35,7 +35,22 @@ if (strcmp($path, '/products') === 0) { // Main products page
 
     } elseif (strcmp($path, '/products/add') === 0) { // handle add product request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productName = $_POST['product_name'];
+            $products = getAllProducts();
+
+            $productsName = array_map(function ($product) {
+                return $product['product_name'];
+            }, $products);
+            $productName = "";
+
+            for ($i=0; $i < count($productsName); $i++) { 
+                if (strcmp(strtolower($_POST['product_name']),strtolower($productsName[$i]))) {
+                    $productName = $_POST['product_name'];
+                } else {
+                    echo ('<h1>Product name already existed</h1>');
+                    die;
+                }
+            }
+
             $categoryId = intval($_POST['category_id']);
             $supplierId = intval($_POST['supplier_id']);
             $productQuantity = intval($_POST['product_quantity']);
