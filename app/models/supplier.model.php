@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-function getAllSuppliers(): array
+function getAllSuppliers(mysqli $connect): array
 {
-    global $connect;
     $sql = "
         SELECT * FROM suppliers
         WHERE is_supp_active = 'YES'
@@ -14,9 +13,8 @@ function getAllSuppliers(): array
     return $categories;
 }
 
-function addNewSupplier(string $supplierName, string $supplierEmail, string $supplierPhone, string $supplierAddress)
+function addNewSupplier(mysqli $connect, string $supplierName, string $supplierEmail, string $supplierPhone, string $supplierAddress)
 {
-    global $connect;
     $sql = "
         INSERT INTO suppliers (supplier_name, supplier_email, supplier_phone, supplier_address)
         VALUES ('$supplierName', '$supplierEmail', '$supplierPhone', '$supplierAddress');
@@ -24,9 +22,8 @@ function addNewSupplier(string $supplierName, string $supplierEmail, string $sup
     mysqli_query($connect, $sql);
 }
 
-function getSupplierInfo(int $supplierId): array
+function getSupplierInfo(mysqli $connect, int $supplierId): array
 {
-    global $connect;
     $sql = "
         SELECT supplier_id, supplier_name, supplier_email, supplier_phone, supplier_address
         FROM suppliers
@@ -38,9 +35,8 @@ function getSupplierInfo(int $supplierId): array
     return $supplierInfo;
 }
 
-function deleteSupplier(int $supplierId)
+function deleteSupplier(mysqli $connect, int $supplierId)
 {
-    global $connect;
     $sql = "
         UPDATE suppliers
         SET is_supp_active = 'NO'
@@ -49,9 +45,8 @@ function deleteSupplier(int $supplierId)
     mysqli_query($connect, $sql);
 }
 
-function editSupplierInfo(int $supplierId, string $supplierName, string $supplierEmail, string $supplierPhone, string $supplierAddress) 
+function editSupplierInfo(mysqli $connect, int $supplierId, string $supplierName, string $supplierEmail, string $supplierPhone, string $supplierAddress) 
 {
-    global $connect;
     $sql = "
         UPDATE suppliers
         SET 
