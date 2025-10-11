@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-function getAllStockMovements(): array
+function getAllStockMovements(mysqli $connect): array
 {
-    global $connect;
     $sql = "
         SELECT 
             s.stock_movement_id, 
@@ -24,9 +23,8 @@ function getAllStockMovements(): array
     return $stockMovements;
 }
 
-function addNewStockMovement(int $productId, int $movementQuantity, string $movementType, string $movementDate)
+function addNewStockMovement(mysqli $connect, int $productId, int $movementQuantity, string $movementType, string $movementDate)
 {
-    global $connect;
     $sql = "
         INSERT INTO stock_movements (product_id, movement_quantity, movement_type, movement_date)
         VALUE ('$productId', '$movementQuantity', '$movementType', '$movementDate');
@@ -51,9 +49,8 @@ function addNewStockMovement(int $productId, int $movementQuantity, string $move
     }
 }
 
-function getStockMovementInfo(int $stockMovementId) : array
+function getStockMovementInfo(mysqli $connect, int $stockMovementId) : array
 {
-    global $connect;
     $sql = "
         SELECT 
             s.stock_movement_id, 
@@ -73,9 +70,8 @@ function getStockMovementInfo(int $stockMovementId) : array
     return $stockMovementInfo;
 }
 
-function deleteStockMovement(int $stockMovementId, int $productId, string $movementType, int $movementQuantity)
+function deleteStockMovement(mysqli $connect, int $stockMovementId, int $productId, string $movementType, int $movementQuantity)
 {
-    global $connect;
     $sql = "
         DELETE FROM stock_movements
         WHERE stock_movement_id = '$stockMovementId';
@@ -101,6 +97,7 @@ function deleteStockMovement(int $stockMovementId, int $productId, string $movem
 }
 
 function editStockMovement(
+    mysqli $connect,
     int $stockMovementId, 
     int $newProductId, 
     int $newMovementQuantity, 
@@ -108,7 +105,6 @@ function editStockMovement(
     string $newMovementDate, 
     array $oldMovementInfo) 
 {
-    global $connect;
     $oldProductId = intval($oldMovementInfo[0]['product_id']);
     $oldMovementType = $oldMovementInfo[0]['movement_type'];
     $oldMovementQuantity = intval($oldMovementInfo[0]['movement_quantity']);
