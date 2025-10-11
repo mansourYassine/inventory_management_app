@@ -34,7 +34,20 @@ if (strcmp($path, '/products') === 0) { // Main products page
         }
 
     } elseif (strcmp($path, '/products/add') === 0) { // handle add product request
-        require VIEWS_PATH . 'product/add_product.view.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $productName = $_POST['product_name'];
+            $categoryId = intval($_POST['category_id']);
+            $supplierId = intval($_POST['supplier_id']);
+            $productQuantity = intval($_POST['product_quantity']);
+            $productPrice = floatval($_POST['product_price']);
+            addNewProduct($productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+            header('Location: /products');
+            exit();
+        } else {
+            $allCategories = getAllCategories();
+            $allSuppliers = getAllSuppliers();
+            require VIEWS_PATH . 'product/add_product.view.php';
+        }
 
     } elseif (strcmp($path, '/products/edit') === 0) { // handle edit product request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
