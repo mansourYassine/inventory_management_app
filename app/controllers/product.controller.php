@@ -19,11 +19,13 @@ if (strcmp($path, '/products') === 0) { // Main products page
             if (strcmp($postKey, 'product_id') === 0){
                 $productId = intval($_POST['product_id']);
                 $productInfo = getProductInfo($productId);
+                mysqli_close($connect);
                 require VIEWS_PATH . 'product/product_info.view.php';
             // Delete product request
             } elseif (strcmp($postKey, 'delete_product_id') === 0) {
                 $productIdToDelete = intval($_POST['delete_product_id']);
                 deleteProduct($productIdToDelete);
+                mysqli_close($connect);
                 header('Location: /products');
                 exit();
             } else {
@@ -56,11 +58,13 @@ if (strcmp($path, '/products') === 0) { // Main products page
             $productQuantity = intval($_POST['product_quantity']);
             $productPrice = floatval($_POST['product_price']);
             addNewProduct($productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+            mysqli_close($connect);
             header('Location: /products');
             exit();
         } else {
             $allCategories = getAllCategories();
             $allSuppliers = getAllSuppliers();
+            mysqli_close($connect);
             require VIEWS_PATH . 'product/add_product.view.php';
         }
 
@@ -74,6 +78,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
                 $productQuantity = intval($_POST['product_quantity']);
                 $productPrice = floatval($_POST['product_price']);
                 editProductInfo($productId, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+                mysqli_close($connect);
                 header('Location: /products');
                 exit();
             } else { // show info of the product to be edited
@@ -83,6 +88,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
                     $productInfo = getProductInfo($productIdToEdit);
                     $allCategories = getAllCategories();
                     $allSuppliers = getAllSuppliers();
+                    mysqli_close($connect);
                     require VIEWS_PATH . 'product/edit_product.view.php';
                 }
             }
