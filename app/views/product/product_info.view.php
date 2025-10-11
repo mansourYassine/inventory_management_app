@@ -13,20 +13,18 @@
         <h1>Product info Page</h1>
         <ul>
             <li>Product Name : <?= $productInfo['product_name'] ?></li>
-            <li>Supplier Name : <?= $productInfo['supplier_name'] ?></li>
             <li>Category Name : <?= $productInfo['category_name'] ?></li>
+            <li>Supplier Name : <?= $productInfo['supplier_name'] ?></li>
             <li>Product Quantity : <?= $productInfo['product_quantity'] ?></li>
             <li>Product Price : <?= $productInfo['product_price'] ?></li>
         </ul>
         <form action="/products/edit" method="post">
-            <input type="hidden" name="product_id" value="<?= $productInfo['product_id'] ?>">
+            <input type="hidden" name="edit_product_id" value="<?= $productInfo['product_id'] ?>">
             <button type="submit">Edit</button>
         </form>
-        <br>
-        <a href="/products/info?delete_product_id=<?= $productInfo['product_id'] ?>">Delete</a>
         <form action="/products/info" method="post">
-            <input type="hidden" name="product_id" value="<?= $productInfo['product_id'] ?>">
-            <button type="submit">Edit</button>
+            <input type="hidden" name="delete_product_id" value="<?= $productInfo['product_id'] ?>">
+            <button type="submit">delete</button>
         </form>
     </body>
 </html>

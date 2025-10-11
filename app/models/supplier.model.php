@@ -4,7 +4,10 @@ declare(strict_types=1);
 function getAllSuppliers(): array
 {
     global $connect;
-    $sql = "SELECT * FROM suppliers";
+    $sql = "
+        SELECT * FROM suppliers
+        WHERE is_supp_active = 'YES'
+    ";
     $result = mysqli_query($connect, $sql);
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);

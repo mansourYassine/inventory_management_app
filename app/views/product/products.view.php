@@ -21,7 +21,12 @@
                     <td><?= $product['supplier_name'] ?></td>
                     <td><?= $product['product_quantity'] ?></td>
                     <td><?= $product['product_price'] ?></td>
-                    <td><a href="/products/info?product_id=<?= $product['product_id'] ?>">More Info</a></td>
+                    <td>
+                        <form action="/products/info" method="post">
+                            <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                            <button type="submit">More Info</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endif ?>
         <?php endforeach?>

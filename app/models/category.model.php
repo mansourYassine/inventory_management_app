@@ -4,7 +4,10 @@ declare(strict_types=1);
 function getAllCategories(): array
 {
     global $connect;
-    $sql = "SELECT * FROM categories";
+    $sql = "
+        SELECT * FROM categories
+        WHERE is_categ_active = 'YES'
+    ";
     $result = mysqli_query($connect, $sql);
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
