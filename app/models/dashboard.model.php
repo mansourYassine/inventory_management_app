@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function getTotalProdutsNumber() : string {
-    global $connect;
-
+function getTotalProdutsNumber(mysqli $connect) : string {
     $sql = "
         SELECT COUNT(*) AS total_products_number
         FROM products;
@@ -14,9 +12,7 @@ function getTotalProdutsNumber() : string {
     return $totalProductsNumber['total_products_number'];
 }
 
-function getTotalProdutsQuantity() : string {
-    global $connect;
-
+function getTotalProdutsQuantity(mysqli $connect) : string {
     $sql = "
         SELECT SUM(product_quantity) AS total_products_quantity
         FROM products;
@@ -27,9 +23,7 @@ function getTotalProdutsQuantity() : string {
     return $totalProductsQuantity['total_products_quantity'];
 }
 
-function getTotalProdutsValue() : string {
-    global $connect;
-
+function getTotalProdutsValue(mysqli $connect) : string {
     $sql = "
         SELECT SUM(product_quantity * product_price) AS total_products_value
         FROM products;
@@ -40,9 +34,7 @@ function getTotalProdutsValue() : string {
     return $totalProductsValue['total_products_value'];
 }
 
-function getLowStockProducts() : array {
-    global $connect;
-
+function getLowStockProducts(mysqli $connect) : array {
     $sql = "
         SELECT *
         FROM products
