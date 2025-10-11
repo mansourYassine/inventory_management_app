@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-function getAllProducts(): array
+function getAllProducts(mysqli $connect): array
 {
-    global $connect;
     $sql = "
         SELECT p.product_id, p.product_name, c.category_id, c.category_name, s.supplier_id, s.supplier_name, p.product_quantity, p.product_price, p.is_active
         FROM products p
@@ -20,9 +19,8 @@ function getAllProducts(): array
     return $products;
 }
 
-function addNewProduct(string $productName, int $categoryId, int $supplierId, int $quantity, float $price)
+function addNewProduct(mysqli $connect, string $productName, int $categoryId, int $supplierId, int $quantity, float $price)
 {
-    global $connect;
     $sql = "
         INSERT INTO products (product_name, category_id, supplier_id, product_quantity, product_price)
         VALUES ('$productName', '$categoryId', '$supplierId', '$quantity', '$price');
@@ -30,9 +28,8 @@ function addNewProduct(string $productName, int $categoryId, int $supplierId, in
     mysqli_query($connect, $sql);
 }
 
-function getProductInfo(int $productId): array
+function getProductInfo(mysqli $connect, int $productId): array
 {
-    global $connect;
     $sql = "
         SELECT p.product_id, p.product_name, c.category_name, c.category_id, s.supplier_name, s.supplier_id, p.product_quantity, p.product_price
         FROM products p
@@ -48,9 +45,8 @@ function getProductInfo(int $productId): array
     return $productInfo;
 }
 
-function deleteProduct(int $productId)
+function deleteProduct(mysqli $connect, int $productId)
 {
-    global $connect;
     $sql = "
         UPDATE products
         SET is_active = 'NO'
@@ -60,6 +56,7 @@ function deleteProduct(int $productId)
 }
 
 function editProductInfo(
+    mysqli $connect,
     int $productId,
     string $productName,
     int $categoryId,
@@ -67,7 +64,6 @@ function editProductInfo(
     int $productQuantity,
     float $productPrice
 ) {
-    global $connect;
     $sql = "
         UPDATE products
         SET 

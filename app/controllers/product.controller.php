@@ -8,7 +8,7 @@ require MODELS_PATH . 'supplier.model.php';
 $path = $uri['path'];
 
 if (strcmp($path, '/products') === 0) { // Main products page
-    $products = getAllProducts();
+    $products = getAllProducts($connect);
     mysqli_close($connect);
     require VIEWS_PATH . 'product/products.view.php';
 } else { // Handle product info requests
@@ -18,13 +18,13 @@ if (strcmp($path, '/products') === 0) { // Main products page
             // product informations request
             if (strcmp($postKey, 'product_id') === 0){
                 $productId = intval($_POST['product_id']);
-                $productInfo = getProductInfo($productId);
+                $productInfo = getProductInfo($connect, $productId);
                 mysqli_close($connect);
                 require VIEWS_PATH . 'product/product_info.view.php';
             // Delete product request
             } elseif (strcmp($postKey, 'delete_product_id') === 0) {
                 $productIdToDelete = intval($_POST['delete_product_id']);
-                deleteProduct($productIdToDelete);
+                deleteProduct($connect, $productIdToDelete);
                 mysqli_close($connect);
                 header('Location: /products');
                 exit();
@@ -37,7 +37,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
 
     } elseif (strcmp($path, '/products/add') === 0) { // handle add product request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $products = getAllProducts();
+            $products = getAllProducts($connect);
 
             $productsName = array_map(function ($product) {
                 return $product['product_name'];
@@ -57,7 +57,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
             $supplierId = intval($_POST['supplier_id']);
             $productQuantity = intval($_POST['product_quantity']);
             $productPrice = floatval($_POST['product_price']);
-            addNewProduct($productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+            addNewProduct($connect, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
             mysqli_close($connect);
             header('Location: /products');
             exit();
@@ -77,7 +77,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
                 $supplierId = intval($_POST['supplier_id']);
                 $productQuantity = intval($_POST['product_quantity']);
                 $productPrice = floatval($_POST['product_price']);
-                editProductInfo($productId, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+                editProductInfo($connect, $productId, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
                 mysqli_close($connect);
                 header('Location: /products');
                 exit();
@@ -85,7 +85,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
                 $postKey = array_key_first($_POST);
                 if (strcmp($postKey, 'edit_product_id') === 0) {
                     $productIdToEdit = intval($_POST['edit_product_id']);
-                    $productInfo = getProductInfo($productIdToEdit);
+                    $productInfo = getProductInfo($connect, $productIdToEdit);
                     $allCategories = getAllCategories();
                     $allSuppliers = getAllSuppliers();
                     mysqli_close($connect);
