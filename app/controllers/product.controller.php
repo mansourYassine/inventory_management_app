@@ -62,7 +62,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
             header('Location: /products');
             exit();
         } else {
-            $allCategories = getAllCategories();
+            $allCategories = getAllCategories($connect);
             $allSuppliers = getAllSuppliers($connect);
             mysqli_close($connect);
             require VIEWS_PATH . 'product/add_product.view.php';
@@ -86,7 +86,7 @@ if (strcmp($path, '/products') === 0) { // Main products page
                 if (strcmp($postKey, 'edit_product_id') === 0) {
                     $productIdToEdit = intval($_POST['edit_product_id']);
                     $productInfo = getProductInfo($connect, $productIdToEdit);
-                    $allCategories = getAllCategories();
+                    $allCategories = getAllCategories($connect);
                     $allSuppliers = getAllSuppliers($connect);
                     mysqli_close($connect);
                     require VIEWS_PATH . 'product/edit_product.view.php';

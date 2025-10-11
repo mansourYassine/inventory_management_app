@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-function getAllCategories(): array
+function getAllCategories(mysqli $connect): array
 {
-    global $connect;
     $sql = "
         SELECT * FROM categories
         WHERE is_categ_active = 'YES'
@@ -14,9 +13,8 @@ function getAllCategories(): array
     return $categories;
 }
 
-function addNewCategory(string $categoryName)
+function addNewCategory(mysqli $connect, string $categoryName)
 {
-    global $connect;
     $sql = "
         INSERT INTO categories (category_name)
         VALUES ('$categoryName');
@@ -24,9 +22,8 @@ function addNewCategory(string $categoryName)
     mysqli_query($connect, $sql);
 }
 
-function getCategoryInfo(int $categoryId): array
+function getCategoryInfo(mysqli $connect, int $categoryId): array
 {
-    global $connect;
     $sql = "
         SELECT category_id, category_name
         FROM categories
@@ -38,9 +35,8 @@ function getCategoryInfo(int $categoryId): array
     return $categoryInfo;
 }
 
-function deleteCategory(int $categoryId)
+function deleteCategory(mysqli $connect, int $categoryId)
 {
-    global $connect;
     $sql = "
         UPDATE categories
         SET is_categ_active = 'NO'
@@ -49,9 +45,8 @@ function deleteCategory(int $categoryId)
     mysqli_query($connect, $sql);
 }
 
-function editCategoryInfo(int $categoryId, string $categoryName) 
+function editCategoryInfo(mysqli $connect, int $categoryId, string $categoryName) 
 {
-    global $connect;
     $sql = "
         UPDATE categories
         SET category_name = '$categoryName'
