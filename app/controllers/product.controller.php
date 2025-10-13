@@ -11,8 +11,8 @@ if (strcmp($path, '/products') === 0) { // Main products page
     $products = getAllProducts($connect);
     mysqli_close($connect);
     require VIEWS_PATH . 'product/products.view.php';
-} else { // Handle product info requests
-    if (strcmp($path, '/products/info') === 0) {
+} else { 
+    if (strcmp($path, '/products/info') === 0) { // Handle product info requests
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postKey = array_key_first($_POST);
             // product informations request

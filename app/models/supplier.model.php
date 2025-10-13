@@ -30,7 +30,7 @@ function getSupplierInfo(mysqli $connect, int $supplierId): array
         WHERE supplier_id = '$supplierId';
     ";
     $result = mysqli_query($connect, $sql);
-    $supplierInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $supplierInfo = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
     return $supplierInfo;
 }

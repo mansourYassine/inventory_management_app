@@ -3,11 +3,11 @@ declare(strict_types=1);
 require DB_CONNECTION_PATH . 'db.php';
 require MODELS_PATH . 'dashboard.model.php';
 
-$totalProductsNumber = getTotalProdutsNumber();
-$totalProductsQuantity = getTotalProdutsQuantity();
-$totalProductsValue = getTotalProdutsValue();
+// $totalProductsNumber = getTotalProdutsNumber($connect);
+// $totalProductsQuantity = getTotalProdutsQuantity($connect);
+// $totalProductsValue = getTotalProdutsValue($connect);
 
-$lowStockProducts = getLowStockProducts();
+// $lowStockProducts = getLowStockProducts($connect);
 
 // dd($lowStockProducts);
 
