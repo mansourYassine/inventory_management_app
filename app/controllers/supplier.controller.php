@@ -44,7 +44,13 @@ if (strcmp($path, '/suppliers') === 0) { // Main suppliers page
                 $supplierEmail = $_POST['supplier_email'];
                 $supplierPhone = $_POST['supplier_phone'];
                 $supplierAddress = $_POST['supplier_address'];
-                editSupplierInfo($connect, $supplierId, $supplierName, $supplierEmail, $supplierPhone, $supplierAddress);
+                editSupplierInfo($connect, 
+                                $supplierId, 
+                                $supplierName, 
+                                $supplierEmail, 
+                                $supplierPhone, 
+                                $supplierAddress
+                                );
                 mysqli_close($connect);
                 header('Location: /suppliers');
                 exit();
