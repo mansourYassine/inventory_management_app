@@ -25,6 +25,9 @@ $routes = [
     '/suppliers/info'       => CONTROLLERS_PATH . 'supplier.controller.php',
     '/suppliers/edit'       => CONTROLLERS_PATH . 'supplier.controller.php',
     '/categories'       => CONTROLLERS_PATH . 'category.controller.php',
+    '/categories/add'       => CONTROLLERS_PATH . 'category.controller.php',
+    '/categories/info'       => CONTROLLERS_PATH . 'category.controller.php',
+    '/categories/edit'       => CONTROLLERS_PATH . 'category.controller.php',
     '/stock_movements' => CONTROLLERS_PATH . 'stock_movement.controller.php',
 ];
 
