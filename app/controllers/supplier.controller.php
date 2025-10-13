@@ -36,8 +36,32 @@ if (strcmp($path, '/suppliers') === 0) { // Main suppliers page
             abort();
         }
 
-    } elseif (strcmp($path, '/suppliers/edit') === 0) {
-        echo 'condition 3';
+    } elseif (strcmp($path, '/suppliers/edit') === 0) { // Handle edit supplier request
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { // edit supplier
+            if (count(array_keys($_POST)) > 1) {
+                $productId = intval($_POST['product_id']);
+                $productName = $_POST['product_name'];
+                $categoryId = intval($_POST['category_id']);
+                $supplierId = intval($_POST['supplier_id']);
+                $productQuantity = intval($_POST['product_quantity']);
+                $productPrice = floatval($_POST['product_price']);
+                editProductInfo($connect, $productId, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+                mysqli_close($connect);
+                header('Location: /products');
+                exit();
+            } else { // show info of the supplier to be edited
+                $postKey = array_key_first($_POST);
+                if (strcmp($postKey, 'edit_supplier_id') === 0) {
+                    $supplierIdToEdit = intval($_POST['edit_supplier_id']);
+                    $supplierInfo = getSupplierInfo($connect, $supplierIdToEdit);
+                    mysqli_close($connect);
+                    require VIEWS_PATH . 'supplier/edit_supplier.view.php';
+                }
+            }
+        } else {
+            abort();
+        }
+
     } else {
         abort();
     }
