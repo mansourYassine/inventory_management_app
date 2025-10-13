@@ -9,9 +9,38 @@ if (strcmp($path, '/suppliers') === 0) { // Main suppliers page
     $suppliers = getAllSuppliers($connect);
     mysqli_close($connect);
     require VIEWS_PATH . 'supplier/suppliers.view.php';
+
 } else {
-    if (strcmp($path, '/suppliers/add') === 0) {
-        echo 'condition 1';
+    if (strcmp($path, '/suppliers/add') === 0) { // handle add supplier request
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Prepare parameters for the addNewSupplier function
+
+            // Check if product name doesn't already exist
+            $suppliers = getAllSuppliers($connect);
+            $suppliersName = array_map(function ($supplier) {
+                return $supplier['supplier_name'];
+            }, $suppliers);
+            $supplierName = "";
+            for ($i=0; $i < count($suppliersName); $i++) { 
+                if (strcmp(strtolower($_POST['supplier_name']),strtolower($suppliersName[$i]))) {
+                    $supplierName = $_POST['supplier_name'];
+                } else {
+                    echo ('<h1>Supplier name already existed</h1>');
+                    die;
+                }
+            }
+
+            $supplierEmail = $_POST['supplier_email'];
+            $supplierPhone = $_POST['supplier_phone'];
+            $supplierAddress = $_POST['supplier_address'];
+            addNewSupplier($connect, $supplierName, $supplierEmail, $supplierPhone, $supplierAddress);
+            mysqli_close($connect);
+            header('Location: /suppliers');
+            exit();
+        } else {
+            require VIEWS_PATH . 'supplier/add_supplier.view.php';
+        }
 
     } elseif (strcmp($path, '/suppliers/info') === 0) { // Handle product info request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
