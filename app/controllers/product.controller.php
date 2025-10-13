@@ -37,13 +37,14 @@ if (strcmp($path, '/products') === 0) { // Main products page
 
     } elseif (strcmp($path, '/products/add') === 0) { // handle add product request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $products = getAllProducts($connect);
 
+            // Prepare parameters for the addNewProduct function
+            // Check if product name doesn't already exist
+            $products = getAllProducts($connect);
             $productsName = array_map(function ($product) {
                 return $product['product_name'];
             }, $products);
             $productName = "";
-
             for ($i=0; $i < count($productsName); $i++) { 
                 if (strcmp(strtolower($_POST['product_name']),strtolower($productsName[$i]))) {
                     $productName = $_POST['product_name'];
