@@ -39,15 +39,14 @@ if (strcmp($path, '/suppliers') === 0) { // Main suppliers page
     } elseif (strcmp($path, '/suppliers/edit') === 0) { // Handle edit supplier request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') { // edit supplier
             if (count(array_keys($_POST)) > 1) {
-                $productId = intval($_POST['product_id']);
-                $productName = $_POST['product_name'];
-                $categoryId = intval($_POST['category_id']);
                 $supplierId = intval($_POST['supplier_id']);
-                $productQuantity = intval($_POST['product_quantity']);
-                $productPrice = floatval($_POST['product_price']);
-                editProductInfo($connect, $productId, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+                $supplierName = $_POST['supplier_name'];
+                $supplierEmail = $_POST['supplier_email'];
+                $supplierPhone = $_POST['supplier_phone'];
+                $supplierAddress = $_POST['supplier_address'];
+                editSupplierInfo($connect, $supplierId, $supplierName, $supplierEmail, $supplierPhone, $supplierAddress);
                 mysqli_close($connect);
-                header('Location: /products');
+                header('Location: /suppliers');
                 exit();
             } else { // show info of the supplier to be edited
                 $postKey = array_key_first($_POST);
