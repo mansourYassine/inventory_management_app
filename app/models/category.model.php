@@ -30,7 +30,7 @@ function getCategoryInfo(mysqli $connect, int $categoryId): array
         WHERE category_id = '$categoryId';
     ";
     $result = mysqli_query($connect, $sql);
-    $categoryInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $categoryInfo = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
     return $categoryInfo;
 }
