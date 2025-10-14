@@ -105,9 +105,9 @@ function editStockMovement(
     string $newMovementDate, 
     array $oldMovementInfo) 
 {
-    $oldProductId = intval($oldMovementInfo[0]['product_id']);
-    $oldMovementType = $oldMovementInfo[0]['movement_type'];
-    $oldMovementQuantity = intval($oldMovementInfo[0]['movement_quantity']);
+    $oldProductId = intval($oldMovementInfo['product_id']);
+    $oldMovementType = $oldMovementInfo['movement_type'];
+    $oldMovementQuantity = intval($oldMovementInfo['movement_quantity']);
 
     // Restore the quantity of the product in the products table
     if (strcmp($oldMovementType, 'IN') === 0) {
