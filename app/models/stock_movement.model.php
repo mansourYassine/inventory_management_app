@@ -65,12 +65,12 @@ function getStockMovementInfo(mysqli $connect, int $stockMovementId) : array
         WHERE stock_movement_id = $stockMovementId
     ";
     $result = mysqli_query($connect, $sql);
-    $stockMovementInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $stockMovementInfo = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
     return $stockMovementInfo;
 }
 
-function deleteStockMovement(mysqli $connect, int $stockMovementId, int $productId, string $movementType, int $movementQuantity)
+function deleteStockMovement(mysqli $connect, string $stockMovementId, string $productId, string $movementType, string $movementQuantity)
 {
     $sql = "
         DELETE FROM stock_movements
@@ -78,7 +78,7 @@ function deleteStockMovement(mysqli $connect, int $stockMovementId, int $product
     ";
     mysqli_query($connect, $sql);
 
-    // Change the quantity of the product in the products table
+    // Restore the quantity of the product in the products table
     if (strcmp($movementType, 'IN') === 0) {
         $sql = "
             UPDATE products
