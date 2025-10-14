@@ -13,7 +13,26 @@ if (strcmp($path, '/stock_movements') === 0) { // Main Stock Movements page
 
 } else {
     if (strcmp($path, '/stock_movements/add') === 0) { // handle add stock movement request
-        echo "<h1>Condition 3</h1>";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Prepare parameters for the addNewStockMovement function
+            $productId = intval($_POST['product_id']);
+            $movementQuantity = intval($_POST['movement_quantity']);
+            $movementType = $_POST['movement_type'];
+            $movementDate = $_POST['movement_date'];
+            addNewStockMovement(
+                $connect,
+                $productId,
+                $movementQuantity,
+                $movementType,
+                $movementDate
+            );
+            mysqli_close($connect);
+            header('Location: /stock_movements');
+            exit();
+        } else {
+            $products = getAllProducts($connect);
+            require VIEWS_PATH . 'stock_movement/add_stock_movement.view.php';
+        }
         
     } elseif (strcmp($path, '/stock_movements/info') === 0) { // Handle stock movement info request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

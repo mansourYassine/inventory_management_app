@@ -9,6 +9,7 @@
     <?php require VIEWS_PATH . 'includes\header.php' ?>
     <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Stock Movements Page</h1>
+    <a href="/stock_movements/add">Add New Stock Movement</a>
     <table border="1">
         <?php foreach ($stockMovements as $stockMovement):?>
             <tr>
