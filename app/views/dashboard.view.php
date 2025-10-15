@@ -9,5 +9,22 @@
         <?php require VIEWS_PATH . 'includes\header.php' ?>
         <?php require VIEWS_PATH . 'includes\navbar.php' ?>
         <h1>Dashboard Page</h1>
+        <ul>
+            <li>Total number of products: <?= $totalProductsNumber ?></li>
+            <li>Total quantity : <?= $totalProductsQuantity ?></li>
+            <li>Total value : <?= $totalProductsValue ?></li>
+        </ul>
+        <table border="1">
+            <tr>
+                <th>Product Name</th>
+                <th>Product Quantity</th>
+            </tr>
+            <?php foreach ($lowStockProducts as $product) :?>
+                <tr>
+                    <td><?= $product['product_name'] ?></td>
+                    <td><?= $product['product_quantity'] ?></td>
+                </tr>
+            <?php endforeach ?>
+        </table>
     </body>
 </html>
