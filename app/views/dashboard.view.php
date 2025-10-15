@@ -14,6 +14,7 @@
             <li>Total quantity : <?= $totalProductsQuantity ?></li>
             <li>Total value : <?= $totalProductsValue ?></li>
         </ul>
+        <h3>Low stock products</h3>
         <table border="1">
             <tr>
                 <th>Product Name</th>
