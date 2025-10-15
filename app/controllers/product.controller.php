@@ -9,20 +9,39 @@ $path = $uri['path'];
 
 if (strcmp($path, '/products') === 0) { // Main products page
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $postKey = array_key_first($_POST);
+        if (strcmp($postKey, 'supplier_id') === 0) { // filter by supplier
+            $products = getAllProducts($connect);
+            $filteredProducts = array_filter(
+                $products,
+                function ($product) {
+                    return strcmp($product['supplier_id'], $_POST['supplier_id']) === 0;
+                }
+            );
+            $products = $filteredProducts;
+            $allSuppliers = getAllSuppliers($connect);
+            $allCategories = getAllCategories($connect);
+            mysqli_close($connect);
+            require VIEWS_PATH . 'product/products.view.php';
+
+        } elseif (strcmp($postKey, 'category_id') === 0) { // filter by category
+            $products = getAllProducts($connect);
+            $filteredProducts = array_filter(
+                $products,
+                function ($product) {
+                    return strcmp($product['category_id'], $_POST['category_id']) === 0;
+                }
+            );
+            $products = $filteredProducts;
+            $allCategories = getAllCategories($connect);
+            $allSuppliers = getAllSuppliers($connect);
+            mysqli_close($connect);
+            require VIEWS_PATH . 'product/products.view.php';
+        }
+    } else { // without filtering
         $products = getAllProducts($connect);
-        $filteredProducts = array_filter(
-            $products,
-            function ($product) {
-                return strcmp($product['category_id'], $_POST['category_id']) === 0;
-            }
-        );
-        $products = $filteredProducts;
         $allCategories = getAllCategories($connect);
-        mysqli_close($connect);
-        require VIEWS_PATH . 'product/products.view.php';
-    } else {
-        $products = getAllProducts($connect);
-        $allCategories = getAllCategories($connect);
+        $allSuppliers = getAllSuppliers($connect);
         mysqli_close($connect);
         require VIEWS_PATH . 'product/products.view.php';
     }

@@ -14,6 +14,21 @@
     <a href="/products/add">Add New Product</a>
     <br>
     <br>
+    <!-- Filter by supplier -->
+    <form action="" method="post">
+        <label for="">Filter By Supplier:</label>
+        <select name="supplier_id" id="">
+            <?php foreach ($allSuppliers as $supplier) :?>
+                <?php if (strcmp($supplier['supplier_id'], $_POST['supplier_id']) === 0) :?>
+                    <option value="<?= $supplier['supplier_id'] ?>" selected><?= $supplier['supplier_name'] ?></option>
+                    <?php else :?>
+                    <option value="<?= $supplier['supplier_id'] ?>"><?= $supplier['supplier_name'] ?></option>
+                <?php endif ?>
+            <?php endforeach ?>
+        </select>
+        <button type="submit">filter</button>
+    </form>
+    <!-- Filter by category -->
     <form action="" method="post">
         <label for="">Filter By Category:</label>
         <select name="category_id" id="">
