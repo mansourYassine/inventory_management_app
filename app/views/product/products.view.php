@@ -12,6 +12,22 @@
     <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Products Page</h1>
     <a href="/products/add">Add New Product</a>
+    <br>
+    <br>
+    <form action="" method="post">
+        <label for="">Filter By Category:</label>
+        <select name="category_id" id="">
+            <?php foreach ($allCategories as $category) :?>
+                <?php if (strcmp($category['category_id'], $_POST['category_id']) === 0) :?>
+                    <option value="<?= $category['category_id'] ?>" selected><?= $category['category_name'] ?></option>
+                    <?php else :?>
+                    <option value="<?= $category['category_id'] ?>"><?= $category['category_name'] ?></option>
+                <?php endif ?>
+            <?php endforeach ?>
+        </select>
+        <button type="submit">filter</button>
+    </form>
+    <br>
     <table border="1">
         <?php foreach ($products as $product):?>
             <?php if (strcmp($product['is_active'], 'YES') === 0):?>

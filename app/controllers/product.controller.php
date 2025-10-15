@@ -8,9 +8,24 @@ require MODELS_PATH . 'supplier.model.php';
 $path = $uri['path'];
 
 if (strcmp($path, '/products') === 0) { // Main products page
-    $products = getAllProducts($connect);
-    mysqli_close($connect);
-    require VIEWS_PATH . 'product/products.view.php';
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $products = getAllProducts($connect);
+        $filteredProducts = array_filter(
+            $products,
+            function ($product) {
+                return strcmp($product['category_id'], $_POST['category_id']) === 0;
+            }
+        );
+        $products = $filteredProducts;
+        $allCategories = getAllCategories($connect);
+        mysqli_close($connect);
+        require VIEWS_PATH . 'product/products.view.php';
+    } else {
+        $products = getAllProducts($connect);
+        $allCategories = getAllCategories($connect);
+        mysqli_close($connect);
+        require VIEWS_PATH . 'product/products.view.php';
+    }
 } else { 
     if (strcmp($path, '/products/info') === 0) { // Handle product info requests
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
